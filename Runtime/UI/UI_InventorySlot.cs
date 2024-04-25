@@ -138,12 +138,15 @@ namespace InventorySystem
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (!draggable.gameObject.activeSelf) return;
             draggable.transform.position = eventData.position;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (!draggable.gameObject.activeSelf) return;
             draggable.gameObject.SetActive(false);
+
             var newSlot = CheckForValidSlot();
             if (draggable.from == newSlot || newSlot == null)
             {
