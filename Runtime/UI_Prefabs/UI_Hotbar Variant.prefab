@@ -90,6 +90,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiInventory: {fileID: 6171388144650525639}
+  useItem:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 97b6df71-4259-4ad8-aa42-0f9824e8d070
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  nextItem:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 72ffd004-b6fe-401a-afd1-2767ad586810
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  prevItem:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: eaa60fb7-d697-4f4f-8fed-4da0826f099f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &6570802481954798095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +225,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2431095247058087082, guid: 2b0c49e392e154745be7d56721af9f0d, type: 3}
+      propertyPath: draggable
+      value: 
+      objectReference: {fileID: 5398769512818801963, guid: 7dd6099955e49c34abb6f87befe31123, type: 3}
     - target: {fileID: 7659746357542066971, guid: 2b0c49e392e154745be7d56721af9f0d, type: 3}
       propertyPath: m_Name
       value: UI_Hotbar Variant

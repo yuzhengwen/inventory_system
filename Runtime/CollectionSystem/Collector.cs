@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace InventorySystem
 {
-    [RequireComponent(typeof(Inventory))]
+    [RequireComponent(typeof(Collider2D))]
     public class Collector : MonoBehaviour
     {
         [Header("List of Inventory & Accepted Item Types")]
