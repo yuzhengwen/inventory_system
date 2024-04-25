@@ -28,12 +28,13 @@ namespace InventorySystem
         // events
         public event Action<ItemDataSO, int> OnItemAdded;
         public event Action<ItemDataSO, int> OnItemRemoved;
+        public Action<ItemDataSO> OnItemUsed;
 
         private void Awake()
         {
             for (int i = 0; i < slotsCount; i++)
             {
-                items.Add(new InventorySlot());
+                items.Add(new InventorySlot(this));
             }
         }
         private void Start()
@@ -71,7 +72,7 @@ namespace InventorySystem
             {
                 if (items[i].IsOccupied())
                     // have to create new item behaviour instances because we can't serialize the them
-                    this.items[i].SetItem(items[i].itemData, items[i].stackSize, ItemUtils.Instance.CreateItemInstance(items[i].itemData.id, gameObject));
+                    this.items[i].SetItem(items[i].itemData, items[i].stackSize);
             }
             ManualUpdateDict();
         }
@@ -119,7 +120,7 @@ namespace InventorySystem
         }
         private InventorySlot AddNewItemInternal(ItemDataSO itemData, int amount)
         {
-            return GetNextEmptySlot().SetItem(itemData, amount, ItemUtils.Instance.CreateItemInstance(itemData.id, gameObject));
+            return GetNextEmptySlot().SetItem(itemData, amount);
         }
         public void RemoveItem(ItemDataSO itemData, int amount)
         {

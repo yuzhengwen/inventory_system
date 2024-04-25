@@ -12,6 +12,9 @@ public class ItemDataSO : ScriptableObject
     public int maxStackSize;
 
     public ItemType itemType;
+
+    public bool useable;
+    public int amtConsumedOnUse;
 }
 
 public enum ItemType

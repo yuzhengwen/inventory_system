@@ -9,8 +9,5 @@ namespace InventorySystem
     public class ItemDB : ScriptableObject
     {
         public ItemDataSO[] items;
-        [Header("Item IDs (must be same as ItemDataSO.id)")]
-        public int COIN = 0;
-        public int CRYSTAL = 1;
     }
 }

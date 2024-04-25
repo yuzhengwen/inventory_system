@@ -16,3 +16,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: a0554d6b25d94764d879b75a149de0dc, type: 3}
   id: 0
   maxStackSize: 10
+  itemType: 0
+  useable: 1
+  amtConsumedOnUse: 5

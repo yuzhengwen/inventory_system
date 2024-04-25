@@ -17,7 +17,7 @@ public class InventorySlotOperationsTest
     [Test]
     public void SetItemTest()
     {
-        InventorySlot slot = new();
+        InventorySlot slot = new(null);
         slot.SetItem(coin, 5);
 
         Assert.AreEqual(slot.stackSize, 5);
@@ -27,7 +27,7 @@ public class InventorySlotOperationsTest
     [Test]
     public void AddItemTest()
     {
-        InventorySlot slot = new();
+        InventorySlot slot = new(null);
         slot.SetItem(coin, 1);
         slot.AddToStack(4);
 
@@ -38,7 +38,7 @@ public class InventorySlotOperationsTest
     [Test]
     public void AddItemWithOverflowTest()
     {
-        InventorySlot slot = new();
+        InventorySlot slot = new(null);
         slot.SetItem(coin, 5);
 
         int overflow = slot.AddToStack(10);
@@ -49,7 +49,7 @@ public class InventorySlotOperationsTest
     [Test]
     public void RemoveItemTest()
     {
-        InventorySlot slot = new();
+        InventorySlot slot = new(null);
         slot.SetItem(coin, 5);
         slot.RemoveFromStack(4);
 
@@ -60,7 +60,7 @@ public class InventorySlotOperationsTest
     [Test]
     public void RemoveItemWithOverflowTest()
     {
-        InventorySlot slot = new();
+        InventorySlot slot = new(null);
         slot.SetItem(coin, 5);
 
         int extra = slot.RemoveFromStack(10);

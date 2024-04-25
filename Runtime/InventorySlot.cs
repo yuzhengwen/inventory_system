@@ -8,7 +8,6 @@ namespace InventorySystem
     {
         public ItemDataSO itemData; // stores static shared data
         public int stackSize;
-        public BaseInventoryItem item; // stores custom behaviours, can be null if no custom behaviour
 
         #region Events
         /// <summary>
@@ -26,13 +25,16 @@ namespace InventorySystem
         /// </summary>
         public event Action OnSlotCleared;
         #endregion
-
+        private Inventory inv;
+        public InventorySlot(Inventory inv)
+        {
+            this.inv = inv;
+        }
         public void ClearSlot()
         {
             OnSlotCleared?.Invoke();
             itemData = null;
             stackSize = 0;
-            item = null;
         }
         /// <summary>
         /// Wrapper method for SetItem(ItemDataSO, int, BaseInventoryItem)
@@ -45,15 +47,14 @@ namespace InventorySystem
             {
                 ClearSlot(); return this;
             }
-            return SetItem(slot.itemData, slot.stackSize, slot.item);
+            return SetItem(slot.itemData, slot.stackSize);
         }
-        public InventorySlot SetItem(ItemDataSO itemData, int stackSize, BaseInventoryItem itemObj = null)
+        public InventorySlot SetItem(ItemDataSO itemData, int stackSize)
         {
             if (itemData == null || stackSize <= 0)
                 ClearSlot();
             this.itemData = itemData;
             this.stackSize = stackSize;
-            this.item = itemObj;
             OnItemChanged?.Invoke(this);
             return this;
         }
@@ -106,7 +107,7 @@ namespace InventorySystem
         /// <returns></returns>
         public InventorySlot Copy()
         {
-            return new InventorySlot { itemData = itemData, stackSize = stackSize };
+            return new InventorySlot(inv) { itemData = itemData, stackSize = stackSize };
         }
         /// <summary>
         /// Swaps the data between the two slots
@@ -123,8 +124,14 @@ namespace InventorySystem
 
         public void UseItem()
         {
-            Debug.Log("Use Item");
-            (item as IUseable)?.Use(this);
+            if (!IsOccupied() || !itemData.useable) return;
+            if (stackSize < itemData.amtConsumedOnUse)
+            {
+                Debug.Log("<color=red>Not enough</color> in stack to use!");
+                return;
+            }
+            RemoveFromStack(itemData.amtConsumedOnUse);
+            inv.OnItemUsed?.Invoke(itemData);
         }
         public bool IsMaxStack() => itemData ? stackSize == itemData.maxStackSize : false;
         public bool IsOccupied() => itemData != null && stackSize > 0;
