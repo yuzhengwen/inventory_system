@@ -28,7 +28,7 @@ namespace InventorySystem
         // events
         public event Action<ItemDataSO, int> OnItemAdded;
         public event Action<ItemDataSO, int> OnItemRemoved;
-        public Action<ItemDataSO> OnItemUsed;
+        public Action<InventorySlot, ItemDataSO> OnItemUsed;
 
         private void Awake()
         {

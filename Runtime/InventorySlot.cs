@@ -130,7 +130,7 @@ namespace InventorySystem
                 Debug.Log("<color=red>Not enough</color> in stack to use!");
                 return;
             }
-            inv.OnItemUsed?.Invoke(itemData);
+            inv.OnItemUsed?.Invoke(this, itemData);
             RemoveFromStack(itemData.amtConsumedOnUse);
         }
         public bool IsMaxStack() => itemData ? stackSize == itemData.maxStackSize : false;
