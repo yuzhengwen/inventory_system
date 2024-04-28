@@ -23,14 +23,17 @@ namespace InventorySystem
             foreach (var uiGroup in uiGroups)
                 uiGroup.uiInventory.AssignInventory(uiGroup.inventoryToAssign);
             CloseFullInventory();
-            fullInventoryOpened = false;
-
-            toggleInventoryAction.performed += (ctx) => ToggleFullInventory();
-            toggleInventoryAction.Enable();
-
-            closeAction = new("Close Inventory", InputActionType.Button, "<Keyboard>/escape");
-            closeAction.performed += (ctx) => CloseFullInventory();
-            closeAction.Enable();
+            if (toggleInventoryAction != null)
+            {
+                toggleInventoryAction.performed += (ctx) => ToggleFullInventory();
+                toggleInventoryAction.Enable();
+            }
+            if (closeAction != null)
+            {
+                closeAction = new("Close Inventory", InputActionType.Button, "<Keyboard>/escape");
+                closeAction.performed += (ctx) => CloseFullInventory();
+                closeAction.Enable();
+            }
         }
         private void OnDisable()
         {
@@ -64,18 +67,18 @@ namespace InventorySystem
             OnItemCollected?.Invoke(itemData);
         }
         #region Opening Inventory
-        private void OpenFullInventory()
+        public void OpenFullInventory()
         {
             if (fullInventoryOpened) return;
             foreach (var uiGroup in uiGroups) uiGroup.Open();
             fullInventoryOpened = true;
         }
-        private void CloseFullInventory()
+        public void CloseFullInventory()
         {
             foreach (var uiGroup in uiGroups) uiGroup.Close();
             fullInventoryOpened = false;
         }
-        private void ToggleFullInventory()
+        public void ToggleFullInventory()
         {
             if (fullInventoryOpened)
                 CloseFullInventory();
